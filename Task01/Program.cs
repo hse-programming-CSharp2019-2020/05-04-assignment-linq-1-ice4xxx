@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,36 +38,47 @@ namespace Task01
         static void Main(string[] args)
         {
             RunTesk01();
+
+            Console.ReadKey();
         }
 
         public static void RunTesk01()
         {
-            int[] arr;
+            int[] arr = new []{1};
             try
             {
                 // Попробуйте осуществить считывание целочисленного массива, записав это ОДНИМ ВЫРАЖЕНИЕМ.
-                arr = 
+                arr = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(i => int.Parse(i)).ToArray();
             }
-            
+            catch (FormatException)
+            {
+                Console.WriteLine("FormatException");
+            }
+
             // использовать синтаксис запросов!
-            IEnumerable<int> arrQuery = from 
+            IEnumerable<int> arrQuery = from t in arr where t < 0 || t % 2 == 0 select t;
 
             // использовать синтаксис методов!
-            IEnumerable<int> arrMethod = arr.
+            IEnumerable<int> arrMethod = arr.Where(i => i % 2 == 0 || i < 0);
 
             try
             {
                 PrintEnumerableCollection<int>(arrQuery, ":");
                 PrintEnumerableCollection<int>(arrMethod, "*");
             }
-        }
+            catch(FormatException)
+            {
+                Console.WriteLine("FormatException");
+            }
 
+        }
         // Попробуйте осуществить вывод элементов коллекции с учетом разделителя, записав это ОДНИМ ВЫРАЖЕНИЕМ.
         // P.S. Есть два способа, оставьте тот, в котором применяется LINQ...
         public static void PrintEnumerableCollection<T>(IEnumerable<T> collection, string separator)
         {
-           
-           
+            Console.Write(collection.ToList().ConvertAll(x=>x.ToString()).Aggregate((x, y) => x + separator + y));
+            Console.WriteLine();
         }
     }
 }
