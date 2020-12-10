@@ -69,10 +69,15 @@ namespace Task03
                 for (int i = 0; i < N; i++)
                 {
                     string[] s = Console.ReadLine().Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
-                    computerInfoList.Add(new ComputerInfo() {year = int.Parse(s[1]), ComputerManufacturer = (Manufacturer)int.Parse(s[2]), Owner = s[0]});
+                    computerInfoList.Add(new ComputerInfo()
+                        {year = int.Parse(s[1]), ComputerManufacturer = (Manufacturer) int.Parse(s[2]), Owner = s[0]});
                 }
             }
-            catch (OverflowException)
+            catch(ArgumentException)
+            {
+                Console.WriteLine("ArgumentException");
+            }
+                catch (OverflowException)
             {
                 Console.WriteLine("OverflowException");
             }
