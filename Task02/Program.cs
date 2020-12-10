@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 /* В задаче не использовать циклы for, while. Все действия по обработке данных выполнять с использованием LINQ
  * 
@@ -38,29 +40,41 @@ namespace Task02
 
         public static void RunTesk02()
         {
-            int[] arr;
+            int[] arr = new int[1];
             try
             {
                 // Попробуйте осуществить считывание целочисленного массива, записав это ОДНИМ ВЫРАЖЕНИЕМ.
-                arr = 
+                arr = Console.ReadLine().Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(i => int.Parse(i)).ToArray();
             }
-            
-            
-            var filteredCollection = arr.
-           
+            catch(OverflowException)
+            {
+                Console.WriteLine("OverflowException");
+            }
+
+
+            var filteredCollection = arr.TakeWhile(i => i != 0).ToList();
+
             try
             {
-                
-                // использовать статическую форму вызова метода подсчета среднего
-                double averageUsingStaticForm = 
-                // использовать объектную форму вызова метода подсчета среднего
-                double averageUsingInstanceForm = 
 
+                // использовать статическую форму вызова метода подсчета среднего
+                double averageUsingStaticForm = Enumerable.Average(filteredCollection.Select(i => i * i));
+                // использовать объектную форму вызова метода подсчета среднего
+                double averageUsingInstanceForm = filteredCollection.Select(i => i * i).Average();
+
+                Console.WriteLine(averageUsingStaticForm);
+                Console.WriteLine(averageUsingInstanceForm);
 
                 // вывести элементы коллекции в одну строку
-                filteredCollection.
+                filteredCollection.ForEach(t => Console.Write(t + " "));
             }
-          
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("InvalidOperationException");
+            }
+
+            Console.ReadKey();
         }
         
     }
