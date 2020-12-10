@@ -63,8 +63,8 @@ namespace Task02
                 // использовать объектную форму вызова метода подсчета среднего
                 double averageUsingInstanceForm = filteredCollection.Select(i => i * i).Average();
 
-                Console.WriteLine(averageUsingStaticForm);
-                Console.WriteLine(averageUsingInstanceForm);
+                Console.WriteLine($"{averageUsingStaticForm:f3}");
+                Console.WriteLine($"{averageUsingInstanceForm:f3}");
 
                 // вывести элементы коллекции в одну строку
                 filteredCollection.ForEach(t => Console.Write(t + " "));
