@@ -50,40 +50,61 @@ using System.Linq;
  */
 namespace Task03
 {
+    enum Manufacturer{
+        Dell = 0,
+        Asus,
+        Apple,
+        Microsoft
+    }
     class Program
     {
         static void Main(string[] args)
         {
-            int N
+            int N;
             List<ComputerInfo> computerInfoList = new List<ComputerInfo>();
             try
             {
-                N = 
-                
+                N = int.Parse(Console.ReadLine());
+
                 for (int i = 0; i < N; i++)
                 {
-                    
+                    string[] s = Console.ReadLine().Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+                    computerInfoList.Add(new ComputerInfo() {year = int.Parse(s[1]), ComputerManufacturer = (Manufacturer)int.Parse(s[2]), Owner = s[0]});
                 }
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("OverflowException");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("FormatException");
             }
            
 
             // выполните сортировку одним выражением
-            var computerInfoQuery = from 
+            var computerInfoQuery = 
+                from t in computerInfoList
+                orderby t.Owner descending, t.ComputerManufacturer.ToString(), t.year descending 
+                select t;
 
             PrintCollectionInOneLine(computerInfoQuery);
 
             Console.WriteLine();
 
             // выполните сортировку одним выражением
-            var computerInfoMethods = computerInfoList.
+            var computerInfoMethods = computerInfoList.OrderByDescending(t => t.Owner)
+                .ThenBy(t => t.ComputerManufacturer.ToString()).ThenByDescending(t => t.year);
 
             PrintCollectionInOneLine(computerInfoMethods);
-            
+
+            Console.ReadKey();
         }
 
         // выведите элементы коллекции на экран с помощью кода, состоящего из одной линии (должна быть одна точка с запятой)
         public static void PrintCollectionInOneLine(IEnumerable<ComputerInfo> collection)
         {
+            collection.ToList().ConvertAll(i => i.Owner.ToString() + ": " + i.ComputerManufacturer + " [" + i.year + "]").ForEach(i => Console.WriteLine(i));
         }
     }
 
@@ -93,5 +114,6 @@ namespace Task03
         public string Owner { get; set; }
         public Manufacturer ComputerManufacturer { get; set; }
         
+        public int year { get; set; }
     }
 }
