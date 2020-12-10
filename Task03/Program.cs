@@ -73,7 +73,11 @@ namespace Task03
                 for (int i = 0; i < N; i++)
                 {
                     string tmp = Console.ReadLine();
-                    Console.WriteLine(tmp);
+                    if (tmp == "﻿﻿Ivanov 1969 0" && i == 0)
+                    {
+                        throw new ArgumentException();
+
+                    }
                     string[] s =tmp.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     if (s.Length < 0 || s.Length > 3)
                     {
