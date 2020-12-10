@@ -60,15 +60,22 @@ namespace Task02
             {
 
                 // использовать статическую форму вызова метода подсчета среднего
-                double averageUsingStaticForm = Enumerable.Average(filteredCollection.Select(i => i * i));
-                // использовать объектную форму вызова метода подсчета среднего
-                double averageUsingInstanceForm = filteredCollection.Select(i => i * i).Average();
+                checked
+                {
+                    double averageUsingStaticForm = Enumerable.Average(filteredCollection.Select(i => i * i));
+                    // использовать объектную форму вызова метода подсчета среднего
+                    double averageUsingInstanceForm = filteredCollection.Select(i => i * i).Average();
 
-                Console.WriteLine(averageUsingStaticForm.ToString("#.000",CultureInfo.InvariantCulture));
-                Console.WriteLine(averageUsingInstanceForm.ToString("#.000", CultureInfo.InvariantCulture));
+                    Console.WriteLine(averageUsingStaticForm.ToString("#.000", CultureInfo.GetCultureInfo("RU")));
+                    Console.WriteLine(averageUsingInstanceForm.ToString("#.000", CultureInfo.GetCultureInfo("RU")));
 
+                }
                 // вывести элементы коллекции в одну строку
                 filteredCollection.ForEach(t => Console.Write(t + " "));
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("OverflowException");
             }
             catch (InvalidOperationException)
             {
