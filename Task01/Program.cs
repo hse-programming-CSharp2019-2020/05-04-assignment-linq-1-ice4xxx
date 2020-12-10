@@ -67,9 +67,13 @@ namespace Task01
                 PrintEnumerableCollection<int>(arrQuery, ":");
                 PrintEnumerableCollection<int>(arrMethod, "*");
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 Console.WriteLine("FormatException");
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("InvalidOperationException");
             }
 
         }
