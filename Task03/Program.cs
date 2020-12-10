@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 /*Все действия по обработке данных выполнять с использованием LINQ
  * 
@@ -61,6 +62,7 @@ namespace Task03
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
             int N;
             List<ComputerInfo> computerInfoList = new List<ComputerInfo>();
             try
@@ -71,6 +73,10 @@ namespace Task03
                 {
 
                     string[] s = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (s.Length < 0 || s.Length > 3)
+                    {
+                        throw new ArgumentException();
+                    }
                     if (int.Parse(s[2]) > 4 || int.Parse(s[2]) < 0)
                     {
                         throw new ArgumentException();
