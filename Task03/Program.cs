@@ -50,7 +50,8 @@ using System.Linq;
  */
 namespace Task03
 {
-    enum Manufacturer{
+    enum Manufacturer
+    {
         Dell = 0,
         Asus,
         Apple,
@@ -68,16 +69,25 @@ namespace Task03
 
                 for (int i = 0; i < N; i++)
                 {
-                    string[] s = Console.ReadLine().Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+
+                    string[] s = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (int.Parse(s[2]) > 4 || int.Parse(s[2]) < 0)
+                    {
+                        throw new ArgumentException();
+                    }
                     computerInfoList.Add(new ComputerInfo()
-                        {year = int.Parse(s[1]), ComputerManufacturer = (Manufacturer) int.Parse(s[2]), Owner = s[0]});
+                    {
+                        year = int.Parse(s[1]),
+                        ComputerManufacturer = (Manufacturer)int.Parse(s[2]),
+                        Owner = s[0]
+                    });
                 }
             }
-            catch(ArgumentException)
+            catch (ArgumentException)
             {
                 Console.WriteLine("ArgumentException");
             }
-                catch (OverflowException)
+            catch (OverflowException)
             {
                 Console.WriteLine("OverflowException");
             }
@@ -85,12 +95,12 @@ namespace Task03
             {
                 Console.WriteLine("FormatException");
             }
-           
+
 
             // выполните сортировку одним выражением
-            var computerInfoQuery = 
+            var computerInfoQuery =
                 from t in computerInfoList
-                orderby t.Owner descending, t.ComputerManufacturer.ToString(), t.year descending 
+                orderby t.Owner descending, t.ComputerManufacturer.ToString(), t.year descending
                 select t;
 
             PrintCollectionInOneLine(computerInfoQuery);
@@ -118,7 +128,7 @@ namespace Task03
     {
         public string Owner { get; set; }
         public Manufacturer ComputerManufacturer { get; set; }
-        
+
         public int year { get; set; }
     }
 }
