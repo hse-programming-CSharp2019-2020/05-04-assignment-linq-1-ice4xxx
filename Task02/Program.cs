@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -63,8 +64,8 @@ namespace Task02
                 // использовать объектную форму вызова метода подсчета среднего
                 double averageUsingInstanceForm = filteredCollection.Select(i => i * i).Average();
 
-                Console.WriteLine($"{averageUsingStaticForm:f3}");
-                Console.WriteLine($"{averageUsingInstanceForm:f3}");
+                Console.WriteLine(averageUsingStaticForm.ToString("#.000",CultureInfo.InvariantCulture));
+                Console.WriteLine(averageUsingInstanceForm.ToString("#.000", CultureInfo.InvariantCulture));
 
                 // вывести элементы коллекции в одну строку
                 filteredCollection.ForEach(t => Console.Write(t + " "));
