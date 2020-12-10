@@ -63,6 +63,7 @@ namespace Task03
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.UTF8;
             int N;
             List<ComputerInfo> computerInfoList = new List<ComputerInfo>();
             try
@@ -71,8 +72,9 @@ namespace Task03
 
                 for (int i = 0; i < N; i++)
                 {
-
-                    string[] s = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    string tmp = Console.ReadLine();
+                    Console.WriteLine(tmp);
+                    string[] s =tmp.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     if (s.Length < 0 || s.Length > 3)
                     {
                         throw new ArgumentException();
