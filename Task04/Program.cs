@@ -107,7 +107,7 @@ namespace Task04
     {
         public static int MyAggregate(int[] arr)
         {
-            bool t = true;
+            bool t = false;
             return arr.Aggregate(5, (x, y) =>
             {
                 t ^= true;
