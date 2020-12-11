@@ -60,11 +60,15 @@ namespace Task04
                 Console.WriteLine("FormatException");
             }
 
+            bool t = false;
             // использовать синтаксис методов! SQL-подобные запросы не писать!
+            int arrAggregate = arr.Aggregate(5, (x, y) =>
+            {
+                t ^= true;
+                return x + y * (t ? 1 : -1);
+            });
 
-            int arrAggregate = arr.Aggregate()
-
-                int arrMyAggregate = MyClass.MyAggregate(arr);
+            int arrMyAggregate = MyClass.MyAggregate(arr);
 
                 Console.WriteLine(arrAggregate);
                 Console.WriteLine(arrMyAggregate);
@@ -78,7 +82,12 @@ namespace Task04
     {
         public static int MyAggregate(int[] arr)
         {
-            return arr.Aggregate((x, y) => x - y) + 5;
+            bool t = false;
+            return arr.Aggregate(5, (x, y) =>
+            {
+                t ^= true;
+                return x + y * (t ? 1 : -1);
+            });
         }
     }
 }

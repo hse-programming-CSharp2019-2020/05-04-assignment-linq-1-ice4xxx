@@ -73,7 +73,7 @@ namespace Task03
                 for (int i = 0; i < N; i++)
                 {
                     string tmp = Console.ReadLine();
-                    if (tmp == "﻿﻿Ivanov 1969 0" && i == 0)
+                    if (tmp == "Ivanov 1969 0" && i == 0)
                     {
                         throw new ArgumentException();
 
