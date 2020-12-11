@@ -61,16 +61,41 @@ namespace Task04
             }
 
             bool t = false;
-            // использовать синтаксис методов! SQL-подобные запросы не писать!
-            int arrAggregate = arr.Aggregate(5, (x, y) =>
+            int arrAggregate = 0;
+            int arrMyAggregate = 0;
+
+            try
             {
-                t ^= true;
-                return x + y * (t ? 1 : -1);
-            });
+                // использовать синтаксис методов! SQL-подобные запросы не писать!
+                checked
+                {
 
-            int arrMyAggregate = MyClass.MyAggregate(arr);
 
-                Console.WriteLine(arrAggregate);
+                    arrAggregate = arr.Aggregate(5, (x, y) =>
+                    {
+                        t ^= true;
+                        return x + y * (t ? 1 : -1);
+                    });
+
+                    arrMyAggregate = MyClass.MyAggregate(arr);
+
+                }
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("ArgumentException");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("OverflowException");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("FormatException");
+            }
+
+
+            Console.WriteLine(arrAggregate);
                 Console.WriteLine(arrMyAggregate);
 
                 Console.ReadKey();
@@ -82,7 +107,7 @@ namespace Task04
     {
         public static int MyAggregate(int[] arr)
         {
-            bool t = false;
+            bool t = true;
             return arr.Aggregate(5, (x, y) =>
             {
                 t ^= true;
